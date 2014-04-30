@@ -6,7 +6,7 @@ This is a simple HTTP file server built in go.
 Installation
 ------------
 
-    go install github.com/caffinatedmonkey/http-server.go/http-server
+    go get github.com/caffinatedmonkey/http-server.go/http-server
 
 Usage
 -----
