@@ -22,7 +22,10 @@ Usage
 Run `http-server` from the directory you would like to serve.
 
 ### Options:
- - `-port`: the port to serve on [`8080`]
+ - `-listen`: the address to listen on for example `0.0.0.0` or the default
+[`:8080`]
  - `-path`: the path to serve [`./`]
+ - `-header`: header sent with every response for example `X-Authentication:
+global`
  - `-help`: displays the help message
 
