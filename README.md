@@ -1,4 +1,4 @@
-http-server.go
+http-server
 ==============
 
 This is a simple, fast and portable HTTP server built in go.
@@ -12,7 +12,9 @@ and about 10x faster than `python -m SimpleHTTPServer`.
 Installation
 ------------
 
-    go get github.com/caffinatedmonkey/http-server.go/http-server
+    go get github.com/caffinatedmonkey/http-server
+    go install github.com/caffinatedmonkey/http-server
+    http-server
 
 Usage
 -----
