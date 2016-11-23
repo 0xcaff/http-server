@@ -33,7 +33,6 @@ func main() {
 				headers:     headers,
 			},
 		},
-		headers,
 	}
 
 	err := server.ListenAndServe()
@@ -54,12 +53,12 @@ func (h HTTPHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	for k, v := range h.headers {
 		responseHeaders.Set(k, v)
 	}
+
 	h.realHandler.ServeHTTP(w, r)
 }
 
 type HTTPServer struct {
 	http.Server
-	headers map[string]string
 }
 
 func (h *HTTPServer) ListenAndServe() error {
@@ -69,7 +68,7 @@ func (h *HTTPServer) ListenAndServe() error {
 		colorize(logging.CYAN, *path),
 	)
 
-	for k, v := range h.headers {
+	for k, v := range h.Handler.(HTTPHandler).headers {
 		logging.Info("Adding Header: %s:%s",
 			colorize(logging.CYAN, k),
 			colorize(logging.CYAN, v),
