@@ -13,7 +13,6 @@ Installation
 ------------
 
     go get github.com/caffinatedmonkey/http-server
-    go install github.com/caffinatedmonkey/http-server
     http-server
 
 Usage
