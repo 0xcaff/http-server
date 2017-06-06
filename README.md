@@ -12,7 +12,7 @@ and about 10x faster than `python -m SimpleHTTPServer`.
 Installation
 ------------
 
-    go get github.com/caffinatedmonkey/http-server
+    go get github.com/0xcaff/http-server
     http-server
 
 Usage
