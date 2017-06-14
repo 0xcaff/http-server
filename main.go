@@ -17,11 +17,11 @@ import (
 var (
 	listen    = flag.String("listen", ":8080", "Address to listen for requests on")
 	servePath = flag.String("path", "./", "Path the server is started from")
-	header    = flag.String("header", "", "Header sent with every response")
-	redirect  = flag.String("redirect", "", "Respond to unknown requests with this file. Used to serve Single Page Applications.")
+	header    = flag.String("header", "", `Header sent with every response (ex: Access-Control-Allow-Origin: *`)
+	redirect  = flag.String("redirect", "", `Respond to unknown requests with this file. Used to serve Single Page Applications. (ex: index.html)`)
 
-	proxyFrom = flag.String("proxy-from", "", "Proxy requests to this path to the the path specified by proxy-to.")
-	proxyTo   = flag.String("proxy-to", "", "Proxy requests from proxy-from to this address")
+	proxyFrom = flag.String("proxy-from", "", `Proxy requests to this path to the the path specified by proxy-to. (ex: /path)`)
+	proxyTo   = flag.String("proxy-to", "", `Proxy requests from proxy-from to this address (ex: https://google.com)`)
 )
 
 func main() {
@@ -47,13 +47,16 @@ func main() {
 		logging.Info("Redirecting 404s to: %s", emp(*redirect))
 	}
 
-	mux.Handle("/", HeaderHandler{
-		Handler: http.FileServer(SinglePageFileSystem{
-			backendSystem: http.Dir(*servePath),
-			redirectTo:    *redirect,
-		}),
-		headers: headers,
-	})
+	if *proxyFrom != "/" {
+		// Don't step over the proxy if proxying from root.
+		mux.Handle("/", HeaderHandler{
+			Handler: http.FileServer(SinglePageFileSystem{
+				backendSystem: http.Dir(*servePath),
+				redirectTo:    *redirect,
+			}),
+			headers: headers,
+		})
+	}
 
 	if *proxyFrom != "" && *proxyTo != "" {
 		// Handle Redirects
