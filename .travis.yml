@@ -1,0 +1,17 @@
+language: go
+
+script:
+  - GOOS=windows GOARCH=386 go build -o http-server.exe
+  - GOOS=darwin  GOARCH=386 go build -o http-server.osx
+  - GOOS=linux   GOARCH=386 go build -o http-server.linux
+
+deploy:
+  file_glob: true
+  file: "http-server*"
+  provider: releases
+  api_key:
+    secure: "a1Yqy0QmOIjUQSFggORv9M17A1MuqlE3ObZl6oESbx4I1kM768glBqkFhVlk4dOpmoLou9bZMbWJ1f9myYzu7dXyr9CLo6vXvw9yKeDpZVkSvOmwDxBBe3PayNkP5JpXuBsvgV1YwI5eVokPy9tzDcVzZiopxk+nOUeXRCUM7fk="
+  skip_cleanup: true
+  on:
+    tags: true
+
