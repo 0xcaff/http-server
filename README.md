@@ -1,5 +1,7 @@
 http-server
-==============
+===========
+
+[![Build Status][build-status-image]][build-status]
 
 This is a simple, fast and portable HTTP server built in go.
 
@@ -20,4 +22,7 @@ Usage
 
 Run `http-server` from the directory you would like to serve. Check out
 `http-server -help` for examples.
+
+[build-status-image]: https://travis-ci.org/0xcaff/http-server.svg?branch=master
+[build-status]: https://travis-ci.org/0xcaff/http-server
 
